@@ -75,7 +75,7 @@ class PlayerSetters : public PlayerEvents {
       vlc_media_list_player_.pause();
     }
   }
-  int Position() {
+  int32_t Position() {
     return  position();
   }
   void PlayOrPause() {

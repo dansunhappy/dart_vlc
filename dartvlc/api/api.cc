@@ -111,9 +111,9 @@ void PlayerPause(int32_t id) {
   Player* player = g_players->Get(id);
   player->Pause();
 }
-void PlayerPosition(int32_t id) {
+int32_t PlayerPosition(int32_t id) {
   Player* player = g_players->Get(id);
-  player->Position();
+  return player->Position();
 }
 
 void PlayerPlayOrPause(int32_t id) {

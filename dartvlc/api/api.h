@@ -51,7 +51,7 @@ DLLEXPORT void PlayerOpen(int32_t id, bool auto_start, const char** source,
 
 DLLEXPORT void PlayerPlay(int32_t id);
 
-DLLEXPORT void PlayerPosition(int32_t id);
+DLLEXPORT int32_t PlayerPosition(int32_t id);
 
 DLLEXPORT void PlayerPause(int32_t id);
 

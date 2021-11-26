@@ -37,9 +37,14 @@ class DartVLCExampleState extends State<DartVLCExample> {
         this.setState(() => this.current = current);
       });
       this.player.positionStream.listen((position) {
+
+        if(((position.duration?.inMilliseconds??0)- (position.position?.inMilliseconds??0)).abs() < 500){
+          this.player.pause();
+        }
         this.setState(() => this.position = position);
       });
       this.player.playbackStream.listen((playback) {
+
         this.setState(() => this.playback = playback);
       });
       this.player.generalStream.listen((general) {
@@ -94,6 +99,13 @@ class DartVLCExampleState extends State<DartVLCExample> {
       isTablet = false;
       isPhone = true;
     }
+    double value = this.player.currentPosition().toDouble();
+    double max = this.player.position.duration?.inMilliseconds.toDouble()??0;
+    if(max < value){
+      max = value + 10;
+    }
+    print('=========${value } ${this.player.currentPosition()} ${this.player.position.duration?.inMilliseconds.toString()}');
+
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
@@ -326,18 +338,8 @@ class DartVLCExampleState extends State<DartVLCExample> {
                               ),
                               Slider(
                                   min: 0,
-                                  max: this
-                                          .position
-                                          .duration
-                                          ?.inMilliseconds
-                                          .toDouble() ??
-                                      1.0,
-                                  value: this
-                                          .position
-                                          .position
-                                          ?.inMilliseconds
-                                          .toDouble() ??
-                                      0.0,
+                                  max:max ,
+                                  value: value,
                                   onChanged: (double position) {
                                     this
                                         .player
