@@ -38,13 +38,11 @@ class DartVLCExampleState extends State<DartVLCExample> {
       });
       this.player.positionStream.listen((position) {
 
-        if(((position.duration?.inMilliseconds??0)- (position.position?.inMilliseconds??0)).abs() < 500){
-          this.player.pause();
-        }
         this.setState(() => this.position = position);
       });
       this.player.playbackStream.listen((playback) {
 
+        print('=== volume ${this.general.volume}');
         this.setState(() => this.playback = playback);
       });
       this.player.generalStream.listen((general) {
